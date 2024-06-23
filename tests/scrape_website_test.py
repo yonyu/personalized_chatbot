@@ -5,7 +5,7 @@ from scrape_website import scrape
 target_url = "https://www.landonhotel.com"
 
 
-class ExtractPdfTest(unittest.TestCase):
+class ScrapeWebsiteTest(unittest.TestCase):
     def test_extract_1(self):
         scrape(target_url)
         my_file = Path('website_text.txt')
