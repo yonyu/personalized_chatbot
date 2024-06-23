@@ -1,16 +1,9 @@
+from flask import Flask, render_template, request, jsonify
 from langchain_openai import OpenAI
 from langchain.prompts import PromptTemplate
 
 
-def run_prompts():
-    """
-    To start a conversation between a user and the Landon Hotel manager, simply type your question and press Enter.
-    """
-    while True:
-        query_llm(input())
-
-
-prompt = open('website_text.txt', 'r').read()
+prompt = open('tests/website_text.txt', 'r').read()
 
 hotel_assistant_template = prompt + """
 You are the hotel manager of Landon Hotel, named "Mr. Landon". 
@@ -34,9 +27,25 @@ llm_chain = hotel_assistant_prompt_template | llm
 
 
 def query_llm(question):
-    print(llm_chain.invoke({'question': question}))
+    response = llm_chain.invoke({'question': question})
+    return response
 
 
-# while True:
-#     query_llm(input())
-    
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/chatbot", methods=["POST"])
+def chatbot():
+    data = request.get_json()
+    question = data["question"]
+    response = query_llm(question)
+    return jsonify({"response": response})
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

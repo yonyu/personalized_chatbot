@@ -6,6 +6,9 @@ target_url = "https://www.landonhotel.com"
 
 
 class ScrapeWebsiteTest(unittest.TestCase):
+    """
+    Run this test to generate to scrate the website to generate a text file 'website_text.txt'
+    """
     def test_extract_1(self):
         scrape(target_url)
         my_file = Path('website_text.txt')

@@ -3,6 +3,9 @@ from extract_pdf import extract_text_from_pdf
 
 
 class ExtractPdfTest(unittest.TestCase):
+    """
+    run the test to extract text from pdf file
+    """
     def test_extract_1(self):
         pdf_path = "Landon-Hotel.pdf"
         extract_text = extract_text_from_pdf(pdf_path)

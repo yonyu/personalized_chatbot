@@ -3,6 +3,9 @@ client = OpenAI()
 
 
 def call_chat():
+    """
+    To ask ChatGPT to list the keywords of the provided content.
+    """
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
